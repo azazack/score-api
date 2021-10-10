@@ -31,4 +31,19 @@ createConnection().then(async (connection) => {
     } 
       return res.send(JSON.stringify("No Player Found"))
   })
+
+  // Get one player by id
+  app.get("/players/:id", async(req:Request,res:Response) => {
+    const player= await Player.findOne(req.params.id);
+
+    try {
+      if(player) {
+        return res.status(200).json(player)
+      } 
+        return res.send(JSON.stringify("No Player Found"))
+    } catch(err) {
+      return res.status(500).json(err)
+    }
+
+  })
 })
