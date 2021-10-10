@@ -1,38 +1,34 @@
-import * as express from "express";
-import {Request,Response} from "express";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
 import "reflect-metadata";
+import Express, { Request, Response } from "express";
+import {createConnection} from "typeorm";
+import {Player} from "./entity/Player";
+import isEmpty from "lodash/isEmpty";
 
-createConnection().then(connection => {
-  const userRepository = connection.getRepository(User);
+const app = Express();
+app.use(Express.json());
 
-  const app = express();
-  app.use(express.json());
+createConnection().then(async (connection) => {
+  app.listen('5000',() => console.log("serever is up and running"))
 
-  app.get("/users" , async function (req:Request,res:Response) {
-    const users = await userRepository.find();
-    res.json(users)
-  })
-
-  app.get("/users/:id", async function (req:Request,res:Response) {
-    const results = await userRepository.findOne(req.params.id)
-    if(results) {
-      return res.send(results)
+  // create a player 
+  app.post("/players" ,async (req:Request,res:Response) => {
+    try {
+     Player.create({
+        full_name:req.body.full_name
+      }).save();
+      return res.status(201).json(req.body.full_name)
+    } catch (err) {
+      return res.status(500).json(err)
     }
-    return res.send(JSON.stringify("No User Found"));
   })
 
-  app.delete("/users/:id", async (req:Request,res:Response) => {
-    const result = await userRepository.delete(req.params.id);
-    return res.send(result)
+  // Get all players
+  app.get("/players", async(_:Request, res:Response) => {
+    const players = await Player.find();
+    
+    if(!isEmpty(players)) {
+      return res.status(200).json(players)
+    } 
+      return res.send(JSON.stringify("No Player Found"))
   })
-
-  // app.get("/users/:id", async function(req: Request, res: Response) {
-  //   const results = await userRepository.findOne(req.params.id);
-  //   return res.send(results);
-  // });
-
-
-  app.listen(4000)
 })
