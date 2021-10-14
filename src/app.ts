@@ -44,6 +44,16 @@ createConnection().then(async (connection) => {
     } catch(err) {
       return res.status(500).json(err)
     }
-
   })
-})
+
+  // Delete a player by id
+  app.delete("/players/:id", async(req:Request,res:Response) => {
+    try {
+      await (await Player.findOne(req.params.id)).remove();
+      return res.status(204).send(JSON.stringify({message:"Player deleted successfully"}))
+    }
+    catch(err) {
+      return res.status(500).json(err)
+    }
+  })
+  })
