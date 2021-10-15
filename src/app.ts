@@ -11,5 +11,4 @@ createConnection().then(async (connection) => {
 
   //Player Routes
   app.use(PlayerRoutes);
-
   })
