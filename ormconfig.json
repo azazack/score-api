@@ -1,9 +1,9 @@
 {
   "type": "postgres",
   "host": "localhost",
-  "port": 5431,
+  "port": 6543,
   "username": "postgres",
-  "password": "",
+  "password": "root",
   "database": "azazack",
   "entities": ["src/entity/*.ts"],
   "logging": true,
