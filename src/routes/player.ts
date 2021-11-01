@@ -17,6 +17,21 @@
     }
   })
 
+    // Get one player by id
+    router.get("/players/:id", async(req:Request,res:Response) => {
+      const player= await Player.findOne(req.params.id);
+  
+      try {
+        if(player) {
+          return res.status(200).json(player)
+        } 
+          return res.send(JSON.stringify("No Player Found"))
+      } catch(err) {
+        return res.status(500).json(err)
+      }
+    })
+  
+
   // Get all players
   router.get("/players", async(_:Request, res:Response) => {
     const players = await Player.find();
@@ -25,20 +40,6 @@
       return res.status(200).json(players)
     } 
       return res.send(JSON.stringify("No Player Found"))
-  })
-
-  // Get one player by id
-  router.get("/players/:id", async(req:Request,res:Response) => {
-    const player= await Player.findOne(req.params.id);
-
-    try {
-      if(player) {
-        return res.status(200).json(player)
-      } 
-        return res.send(JSON.stringify("No Player Found"))
-    } catch(err) {
-      return res.status(500).json(err)
-    }
   })
 
   // Delete a player by id
