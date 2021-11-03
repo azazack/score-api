@@ -6,7 +6,7 @@
   const router = Express.Router();
   
   // create a player 
-  router.post("/players" ,async (req:Request,res:Response) => {
+  router.post("/api/players" ,async (req:Request,res:Response) => {
     try {
      Player.create({
         full_name:req.body.full_name
@@ -18,7 +18,7 @@
   })
 
     // Get one player by id
-    router.get("/players/:id", async(req:Request,res:Response) => {
+    router.get("/api/players/:id", async(req:Request,res:Response) => {
       const player= await Player.findOne(req.params.id);
   
       try {
@@ -33,7 +33,7 @@
   
 
   // Get all players
-  router.get("/players", async(_:Request, res:Response) => {
+  router.get("/api/players", async(_:Request, res:Response) => {
     const players = await Player.find();
     
     if(!isEmpty(players)) {
@@ -43,7 +43,7 @@
   })
 
   // Delete a player by id
-  router.delete("/players/:id", async(req:Request,res:Response) => {
+  router.delete("/api/players/:id", async(req:Request,res:Response) => {
     try {
       await (await Player.findOne(req.params.id)).remove();
       return res.status(204).send(JSON.stringify({message:"Player deleted successfully"}))
