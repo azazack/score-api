@@ -1,4 +1,3 @@
-
   import {Player} from "../entity/Player";
   import isEmpty from "lodash/isEmpty";
   import Express, {Request,Response} from "express";
