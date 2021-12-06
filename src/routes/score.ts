@@ -7,10 +7,10 @@ const router = Express.Router();
 router.post("/api/score" ,async (req:Request,res:Response) => {
     try {
         Score.create({
-            result:req.body.result,
+            result:req.body.score.result,
             date:new Date(),
-            players:req.body.players,
-            winner:req.body.winner,
+            players:req.body.score.players,
+            winner:req.body.score.winner,
         }).save();
         return res.status(201).json(req.body.result)
     } catch (err) {
