@@ -4,6 +4,7 @@ import {createConnection} from "typeorm";
 import PlayerRoutes from "./routes/player";
 import ScoreRoutes from "./routes/score";
 import cors from "cors";
+import "dotenv/config";
 
 const app = Express();
 app.use(Express.json());
