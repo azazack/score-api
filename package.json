@@ -27,5 +27,9 @@
     "ts-node-dev": "^1.0.0-pre.62",
     "typeorm": "^0.2.38",
     "uuid": "^8.3.2"
+  },
+
+  "engines": {
+    "node": "14.x"
   }
 }
