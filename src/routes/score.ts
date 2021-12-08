@@ -4,6 +4,10 @@ import isEmpty from "lodash/isEmpty";
 
 const router = Express.Router();
 
+router.get("/", async (_:Request, res:Response) => {
+    res.send(JSON.stringify("No score Found"))
+})
+
 router.post("/api/score" ,async (req:Request,res:Response) => {
     try {
         Score.create({
