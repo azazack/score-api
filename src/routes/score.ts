@@ -8,7 +8,7 @@ router.post("/api/score" ,async (req:Request,res:Response) => {
     try {
         Score.create({
             result:req.body.score.result,
-            date:new Date(),
+            date:req.body.score.date ? req.body.score.date : new Date(),
             players:req.body.score.players,
             winner:req.body.score.winner,
         }).save();
