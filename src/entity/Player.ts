@@ -5,14 +5,14 @@ import {Score} from "./Score";
 export class Player extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   public id:number;
-  
+
   @Column('text',{nullable:true})
   public full_name:string;
 
-  @ManyToMany((type) => Score, (score) => score.players)
+  @ManyToMany((type) => Score, score => score.players)
   @JoinTable()
   scores: Score[];
 
-  @ManyToOne((type) => Score, (score) => score.winner)
+  @ManyToOne((type) => Score, score => score.winner)
   winner:Score;
 }

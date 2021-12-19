@@ -7,9 +7,9 @@
   // create a player
   router.post("/api/players" ,async (req:Request,res:Response) => {
     try {
-     Player.create({
-        full_name:req.body.full_name
-      }).save();
+     await Player.create({
+       full_name: req.body.full_name
+     }).save();
       return res.status(201).json(req.body.full_name)
     } catch (err) {
       return res.status(500).json(err)

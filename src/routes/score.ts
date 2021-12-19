@@ -6,20 +6,20 @@ const router = Express.Router();
 
 router.post("/api/score" ,async (req:Request,res:Response) => {
     try {
-        Score.create({
-            result:req.body.score.result,
-            date:req.body.score.date ? req.body.score.date : new Date(),
-            players:req.body.score.players,
-            winner:req.body.score.winner,
+        await Score.create({
+            result: req.body.score.result,
+            date: new Date(),
+            players: req.body.score.players,
+            winner: req.body.score.winner,
         }).save();
-        return res.status(201).json(req.body.result)
+        return res.status(201).json(req.body.score)
     } catch (err) {
         return res.status(500).json(err)
     }
 })
 
 router.get("/api/scores", async(_:Request, res:Response) => {
-    const scores = await Score.find({ relations: ['winner','players'] });
+    const scores = await Score.find({ relations: ['winner','players'],order:{date:"DESC"} });
 
     if(!isEmpty(scores)) {
         return res.status(200).json(scores)
