@@ -39,9 +39,7 @@
         return res.status(500).json(err)
       }
     })
-
-
-
+  
   // Delete a player by id
   router.delete("/api/players/:id", async(req:Request,res:Response) => {
     try {
