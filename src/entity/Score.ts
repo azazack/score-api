@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany} from "typeorm";
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany, JoinTable} from "typeorm";
 import {Player} from "./Player";
 
 @Entity("Score")
@@ -12,10 +12,10 @@ export class Score extends BaseEntity {
     @Column("date")
     public date: Date;
 
-    @ManyToMany((type) => Player, (player) => player.scores)
+    @ManyToMany((type) => Player, player => player.scores)
     players: Player[];
 
-    @OneToMany((type) => Player, (player) => player.winner)
+    @OneToMany((type) => Player, player => player.winner)
     winner:Player;
 
 }
