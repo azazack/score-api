@@ -4,13 +4,14 @@ import isEmpty from "lodash/isEmpty";
 
 const router = Express.Router();
 
-router.post("/api/score" ,async (req:Request,res:Response) => {
+router.post("/api/scores" ,async (req:Request,res:Response) => {
     try {
         await Score.create({
             result: req.body.score.result,
-            date: new Date(),
+            date: req.body.score.date ? req.body.score.date : new Date(),
             players: req.body.score.players,
             winner: req.body.score.winner,
+            week:req.body.score.week
         }).save();
         return res.status(201).json(req.body.score)
     } catch (err) {

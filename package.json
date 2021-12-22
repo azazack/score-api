@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/app.ts",
+    "dev": "nodemon src/app.ts",
     "lintfix": "eslint src --fix --cache"
   },
   "devDependencies": {
