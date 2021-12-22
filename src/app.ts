@@ -3,6 +3,7 @@ import Express from "express";
 import {createConnection} from "typeorm";
 import PlayerRoutes from "./routes/player";
 import ScoreRoutes from "./routes/score";
+import WeekRoutes from "./routes/Week";
 import cors from "cors";
 import * as dotenv from "dotenv";
 
@@ -17,5 +18,5 @@ createConnection().then(async (connection) => {
   app.listen(port,() => console.log("server is up and running"))
 
   //Player Routes
-  app.use(PlayerRoutes,ScoreRoutes);
+  app.use(PlayerRoutes,ScoreRoutes,WeekRoutes );
   })

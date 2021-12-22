@@ -12,7 +12,4 @@ export class Player extends BaseEntity {
   @ManyToMany((type) => Score, score => score.players)
   @JoinTable()
   scores: Score[];
-
-  @ManyToOne((type) => Score, score => score.winner)
-  winner:Score;
 }

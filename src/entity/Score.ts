@@ -1,5 +1,6 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany, JoinTable} from "typeorm";
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToOne, ManyToOne,JoinColumn} from "typeorm";
 import {Player} from "./Player";
+import {Week} from "./Week";
 
 @Entity("Score")
 export class Score extends BaseEntity {
@@ -15,7 +16,11 @@ export class Score extends BaseEntity {
     @ManyToMany((type) => Player, player => player.scores)
     players: Player[];
 
-    @OneToMany((type) => Player, player => player.winner)
+    @OneToOne((type) => Player)
+    @JoinColumn()
     winner:Player;
+
+    @ManyToOne(() => Week, week => week.scores)
+    week:Week
 
 }
