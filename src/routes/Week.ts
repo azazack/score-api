@@ -12,7 +12,8 @@ router.post("/api/weeks",async (req:Request,res:Response) => {
     if(isEmpty(exist_week)){
         try {
             await Week.create({
-                week_num:req.body.week_num
+                week_num:req.body.week_num,
+                winner:req.body.winner ? req.body.winner : null
             }).save();
         } catch (err){
             return res.status(500).json(err)
@@ -40,12 +41,22 @@ router.get("/api/weeks", async(req:Request, res:Response) => {
 
 // Get all weeks with scores
 router.get("/api/weeks/scores", async(_:Request, res:Response) => {
-    const weeks = await Week.find({ relations: ['scores','scores.winner','scores.players' ] });
+    const weeks = await Week.find({ relations: ['scores','scores.winner','scores.players',"winner" ] });
 
     if(!isEmpty(weeks)) {
         return res.status(200).json(weeks)
     }
     return res.send(JSON.stringify("No score Found"))
+})
+
+// Declare week winner
+router.put("/api/weeks/winner",async (req:Request,res:Response) => {
+    try {
+        await Week.update({id:req.body.week_id},{winner:req.body.winner_id})
+    }
+    catch (err){
+        return res.status(500).json(err)
+    }
 })
 
 
