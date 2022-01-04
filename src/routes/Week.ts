@@ -15,6 +15,7 @@ router.post("/api/weeks",async (req:Request,res:Response) => {
                 week_num:req.body.week_num,
                 winner:req.body.winner ? req.body.winner : null
             }).save();
+            return res.status(200).send(JSON.stringify("Week Added"))
         } catch (err){
             return res.status(500).json(err)
         }
@@ -41,7 +42,10 @@ router.get("/api/weeks", async(req:Request, res:Response) => {
 
 // Get all weeks with scores
 router.get("/api/weeks/scores", async(_:Request, res:Response) => {
-    const weeks = await Week.find({ relations: ['scores','scores.winner','scores.players',"winner" ] });
+    const weeks = await Week.find({ relations: ['scores','scores.winner','scores.players',"winner" ],
+        order:{
+            week_num:"DESC"
+        }});
 
     if(!isEmpty(weeks)) {
         return res.status(200).json(weeks)
