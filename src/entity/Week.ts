@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn,OneToOne,JoinColumn} from "typeorm";
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn,OneToOne,JoinColumn,ManyToOne} from "typeorm";
 import {Score} from "./Score";
 import {Player} from "./Player";
 @Entity('Week')
@@ -9,8 +9,7 @@ export class Week extends BaseEntity {
     @Column()
     public week_num:number;
 
-    @OneToOne((type) => Player)
-    @JoinColumn()
+    @ManyToOne((type) => Player,winner => winner.week_winner)
     winner:Player;
 
     @OneToMany(() => Score, score => score.week)
