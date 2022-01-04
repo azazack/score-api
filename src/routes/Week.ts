@@ -53,6 +53,8 @@ router.get("/api/weeks/scores", async(_:Request, res:Response) => {
 router.put("/api/weeks/winner",async (req:Request,res:Response) => {
     try {
         await Week.update({id:req.body.week_id},{winner:req.body.winner_id})
+        return res.send(JSON.stringify("Winner Set Correctly"))
+
     }
     catch (err){
         return res.status(500).json(err)
