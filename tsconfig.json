@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,  
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "esModuleInterop": true,

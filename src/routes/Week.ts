@@ -24,6 +24,8 @@ router.post("/api/weeks",async (req:Request,res:Response) => {
     }
 })
 
+
+
 // Get all weeks
 router.get("/api/weeks", async(req:Request, res:Response) => {
     const latest = req.query.latest;
